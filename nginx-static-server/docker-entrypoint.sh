@@ -2,6 +2,18 @@
 
 set -e
 
+# Set default values for some required env vars
+export CSP_CONNECT_SRC="${CSP_CONNECT_SRC:-""}"
+export CSP_STYLE_SRC="${CSP_STYLE_SRC:-""}"
+export CSP_SCRIPT_SRC="${CSP_SCRIPT_SRC:-""}"
+export CSP_OBJECT_SRC="${CSP_OBJECT_SRC:-""}"
+export CSP_FRAME_SRC="${CSP_FRAME_SRC:-""}"
+export CSP_FONT_SRC="${CSP_FONT_SRC:-""}"
+export CSP_IMG_SRC="${CSP_IMG_SRC:-""}"
+export CSP_MEDIA_SRC="${CSP_MEDIA_SRC:-""}"
+export CSP_DEFAULT_SRC="${CSP_DEFAULT_SRC:-""}"
+export CSP_REPORT_URI="${CSP_REPORT_URI:-""}"
+
 ENVSUBST_SHELL_FORMAT=
 if [ -f "/app/envsubst-shell-format" ]
 then
