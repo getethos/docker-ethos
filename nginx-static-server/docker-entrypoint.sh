@@ -3,9 +3,9 @@
 set -e
 
 ENVSUBST_SHELL_FORMAT=
-if [ -f "/app/envsubst-shell-format" ]
+if [ -f "/etc/ethos/config/envsubst-shell-format" ]
 then
-  ENVSUBST_SHELL_FORMAT=$(cat /app/envsubst-shell-format)
+  ENVSUBST_SHELL_FORMAT=$(cat /etc/ethos/config/envsubst-shell-format)
 fi
 
 # Some snippets files could be .template files that need to be interpolated using envsubst.
