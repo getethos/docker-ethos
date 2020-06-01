@@ -2,10 +2,27 @@
 
 set -e
 
+ENVSUBST_SHELL_FORMAT_FILE_PATH=${ENVSUBST_SHELL_FORMAT_FILE_PATH="/etc/ethos/config/envsubst-shell-format"}
 ENVSUBST_SHELL_FORMAT=
-if [ -f "/etc/ethos/config/envsubst-shell-format" ]
-then
-  ENVSUBST_SHELL_FORMAT=$(cat /etc/ethos/config/envsubst-shell-format)
+
+if [[ -f "$ENVSUBST_SHELL_FORMAT_FILE_PATH" ]]; then
+  ENVSUBST_SHELL_FORMAT=$(cat "$ENVSUBST_SHELL_FORMAT_FILE_PATH")
+fi
+
+# Run envsubst on the shell format file itself. This helps with debugging because we 
+# can see the rendered output of the environment variables easily.
+# This will take the envsubst-shell-format file, run sed to format the file like:
+# ...
+# API_ROOT_URL=${API_ROOT_URL}
+# ...
+# then run envsubst on it to get the interpolated variables like:
+# ...
+# API_ROOT_URL=api.ethoslife.com
+# ...
+# and print it to stdout
+if [[ "$DEBUG_ENVSUBST_SHELL_FORMAT" = "true" ]]; then
+  echo '$DEBUG_ENVSUBST_SHELL_FORMAT is set to true. Printing rendered envsubst-shell-format file to stdout.'
+  sed 's/${\(\w\+\)}/\1=${\1}/' "$ENVSUBST_SHELL_FORMAT_FILE_PATH" | envsubst "$ENVSUBST_SHELL_FORMAT"
 fi
 
 # Some snippets files could be .template files that need to be interpolated using envsubst.

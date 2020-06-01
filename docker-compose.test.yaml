@@ -1,0 +1,13 @@
+version: "3"
+services:
+  nginx_static_server:
+    build: ./nginx-static-server
+    environment:
+      DEBUG_ENVSUBST_SHELL_FORMAT: "true"
+      MY_VAR: "value"
+      MY_VAR2: "value2"
+      FOO: "foovalue"
+      BAR: "barvalue"
+      TEST: "true"
+    volumes:
+      - ./nginx-static-server/test/envsubst-shell-format:/etc/ethos/config/envsubst-shell-format
