@@ -10,6 +10,7 @@ RUN rm -r /usr/share/nginx/html/* /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY conf.d /etc/nginx/conf.d
 COPY snippets /etc/nginx/snippets
+RUN mkdir -p /etc/nginx/locations
 
 # Start nginx, using a custom entrypoint to template env variables
 # Docs: https://success.docker.com/article/use-a-script-to-initialize-stateful-container-data

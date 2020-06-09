@@ -14,3 +14,4 @@ services:
     volumes:
       - ./nginx-static-server/test/envsubst-shell-format:/etc/ethos/config/envsubst-shell-format
       - ./nginx-static-server/test/index.html:/app/dist/index.html
+      - ./nginx-static-server/test/redirects.conf:/etc/nginx/locations/redirects.conf
