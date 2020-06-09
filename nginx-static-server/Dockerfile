@@ -16,4 +16,4 @@ RUN mkdir -p /etc/nginx/locations
 # Docs: https://success.docker.com/article/use-a-script-to-initialize-stateful-container-data
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT [ "/usr/local/bin/docker-entrypoint.sh" ]
-CMD ["/bin/ash", "-c", "nginx -g 'daemon off;'"]
+CMD ["nginx", "-g", "daemon off;"]
