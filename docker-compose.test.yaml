@@ -3,15 +3,11 @@ services:
   nginx_static_server:
     build: ./nginx-static-server
     environment:
-      DEBUG_ENVSUBST_SHELL_FORMAT: "true"
-      MY_VAR: "value"
-      MY_VAR2: "value2"
-      FOO: "foovalue"
-      BAR: "barvalue"
-      TEST: "true"
+      ADDITIONAL_NGINX_CONFIG: |
+        location /foo {
+          return 301 $scheme://$http_host/app$is_args$args;
+        }
     ports:
       - 8080:80
     volumes:
-      - ./nginx-static-server/test/envsubst-shell-format:/etc/ethos/config/envsubst-shell-format
-      - ./nginx-static-server/test/index.html:/app/dist/index.html
-      - ./nginx-static-server/test/redirects.conf:/etc/nginx/locations/redirects.conf
+      - ./nginx-static-server/test/index.html:/usr/share/nginx/html/index.html

@@ -1,3 +1,7 @@
+add_header X-Frame-Options "SAMEORIGIN" always;
+add_header X-XSS-Protection "1; mode=block" always;
+add_header X-Content-Type-Options "nosniff" always;
+
 # These have to be defined in separate variable because apparently nginx has a limit to the maximum
 # length a line can be and I couldn't find any way to change it. If all of these variables are on one line
 # we get this error: "[emerg] 1#1: too long parameter, probably missing terminating """ character in /etc/nginx/conf.d/csp/admin.conf:1"
@@ -16,3 +20,6 @@ set $csp_report_uri     "${CSP_REPORT_URI}";
 
 # Concat them all together
 add_header Content-Security-Policy "${csp_connect_src}${csp_style_src}${csp_script_src}${csp_object_src}${csp_frame_src}${csp_font_src}${csp_img_src}${csp_media_src}${csp_default_src}${csp_report_uri}";
+
+# Add in anything else we want on every request from an environment variable
+${ADDITIONAL_GLOBAL_NGINX_CONFIG}
