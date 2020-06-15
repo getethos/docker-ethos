@@ -7,7 +7,9 @@ services:
         location /foo {
           return 301 $scheme://$http_host/app$is_args$args;
         }
+      DEPLOY_ENVIRONMENT: production
     ports:
       - 8080:80
     volumes:
-      - ./nginx-static-server/test/index.html:/usr/share/nginx/html/index.html
+      - ./nginx-static-server/test/staging.html:/app/dist/staging/index.html
+      - ./nginx-static-server/test/production.html:/app/dist/production/index.html

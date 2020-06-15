@@ -1,13 +1,14 @@
 FROM nginx:1.19.0-alpine
 
 # Delete the default nginx files
-RUN rm -r /usr/share/nginx/html/* \
+RUN rm -r /usr/share/nginx/html \
   /etc/nginx/conf.d/default.conf \
   /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
 
 # Copy nginx configs
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY templates /etc/nginx/templates
+COPY 010-symlink-bundle.sh /docker-entrypoint.d/010-symlink-bundle.sh
 
 # Default this to a blank string. Users can override if they want additional configuration.
 # This will be interpolated into the /etc/nginx/global.conf.template file
