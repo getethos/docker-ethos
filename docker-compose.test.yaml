@@ -5,7 +5,7 @@ services:
     environment:
       ADDITIONAL_NGINX_CONFIG: |
         location /foo {
-          return 301 $scheme://$http_host/app$is_args$args;
+          return 301 $$scheme://$$http_host/app$$is_args$$args;
         }
       DEPLOY_ENVIRONMENT: production
     ports:
@@ -13,3 +13,4 @@ services:
     volumes:
       - ./nginx-static-server/test/staging.html:/app/dist/staging/index.html
       - ./nginx-static-server/test/production.html:/app/dist/production/index.html
+      - ./nginx-static-server/test/redirects.conf:/etc/nginx/conf.d/includes/redirects.conf

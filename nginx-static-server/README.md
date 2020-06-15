@@ -24,3 +24,19 @@ WORKDIR /app/dist
 COPY --from=staging /app/public staging
 COPY --from=production /app/public production
 ```
+
+## Configuration
+
+There are several ways to extend the Nginx configuration.
+
+#### ADDITIONAL_NGINX_CONFIG environment variable
+
+The value for this environment variable will be placed into the main Nginx config as-is. This will be set at runtime, so you can use this to add extra locations that need to be different between staging and production environments.
+
+#### Add .conf files to /etc/nginx/conf.d/includes
+
+A child Docker image can add files to this path and they will be included into the Nginx config as-is. This helps for adding files that are the same between environments.
+
+#### Add .conf files to /etc/nginx/conf.d/mounts
+
+This is intended to be used by Kubernetes to mount files that are different between environments. This helps if the configuration is large and would be hard to manage as a raw environment variable. This allows us to easily include multiple files using Kubernetes ConfigMap volumes.
