@@ -28,5 +28,3 @@ ENV CSP_IMG_SRC=""
 ENV CSP_MEDIA_SRC=""
 ENV CSP_DEFAULT_SRC=""
 ENV CSP_REPORT_URI=""
-
-CMD ["nginx", "-g", "daemon off;"]
