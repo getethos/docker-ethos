@@ -15,6 +15,7 @@ server {
 
   # Add caching for our static assets
   location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
+    root   /usr/share/nginx/html;
     expires 1d;
   }
 

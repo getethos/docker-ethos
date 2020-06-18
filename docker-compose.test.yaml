@@ -11,6 +11,6 @@ services:
     ports:
       - 8080:80
     volumes:
-      - ./nginx-static-server/test/staging.html:/app/dist/staging/index.html
-      - ./nginx-static-server/test/production.html:/app/dist/production/index.html
+      - ./nginx-static-server/test/static:/app/dist/staging
+      - ./nginx-static-server/test/static:/app/dist/production
       - ./nginx-static-server/test/redirects.conf:/etc/nginx/conf.d/includes/redirects.conf
