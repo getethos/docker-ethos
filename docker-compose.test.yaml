@@ -3,10 +3,10 @@ services:
   nginx_static_server:
     build: ./nginx-static-server
     environment:
-      ADDITIONAL_NGINX_CONFIG: |
+      ADDITIONAL_NGINX_CONFIG: "
         location /foo {
-          return 301 $$scheme://$$http_host/app$$is_args$$args;
-        }
+        return 301 $$scheme://$$http_host/app$$is_args$$args;
+        }"
       DEPLOY_ENVIRONMENT: production
     ports:
       - 8080:80
