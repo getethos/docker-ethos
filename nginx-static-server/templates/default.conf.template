@@ -13,10 +13,16 @@ server {
     return 200;
   }
 
-  # Add caching for our static assets
-  location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
+  # Disable caching for some types of files
+  location ~* \.(manifest|appcache|html?|xml|json)$ {
     root   /usr/share/nginx/html;
-    expires 1d;
+    expires -1;
+  }
+
+  # Add caching for our static assets
+  location ~* \.(js|css|png|jpg|jpeg|gif|ico|woff2)$ {
+    root   /usr/share/nginx/html;
+    expires 1M;
   }
 
   # Add configs that can be changed at runtime
