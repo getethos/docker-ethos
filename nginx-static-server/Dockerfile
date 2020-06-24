@@ -21,7 +21,6 @@ ENV ADDITIONAL_NGINX_CONFIG=""
 # routing will take over, but some applications may want to return a page such as 404.html or status code 404.
 # Don't include a "/" prefix
 ENV DEFAULT_404_PAGE="index.html"
-# Must include the "=" as a prefix
 ENV DEFAULT_404_STATUS_CODE="200"
 # Setting default values here so client don't have to set these themselves and 
 # they only need to set them if they want.
