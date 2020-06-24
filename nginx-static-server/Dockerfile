@@ -20,7 +20,7 @@ ENV ADDITIONAL_NGINX_CONFIG=""
 # Configure the default 404 page. Most SPAs will just return a 200 and /index.html and then the client side
 # routing will take over, but some applications may want to return a page such as 404.html or status code 404.
 # Don't include a "/" prefix
-ENV DEFAULT_NOT_FOUND_PAGE="index.html"
+ENV DEFAULT_NOT_FOUND_PAGE="/index.html"
 ENV DEFAULT_NOT_FOUND_STATUS_CODE="200"
 # Setting default values here so client don't have to set these themselves and 
 # they only need to set them if they want.
