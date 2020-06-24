@@ -5,15 +5,15 @@ server {
   # Add configs that we want on every request. For example, we're adding CSP headers
   include /etc/nginx/conf.d/global.conf;
 
-  location / {
+  location = / {
     index index.html;
   }
 
-  location /* {
-    try_files $uri $uri/ =404;
+  # Most SPAs just return 200 and /index.html no matter what,
+  # but some may want to return a different page or status code.
+  location / {
+    try_files $uri $uri/ ${DEFAULT_404_PAGE} =${DEFAULT_404_STATUS_CODE};
   }
-
-  error_page 404             ${DEFAULT_404_PAGE};
 
   location /health_check {
     return 200;
