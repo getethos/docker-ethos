@@ -17,6 +17,9 @@ COPY 010-symlink-bundle.sh /docker-entrypoint.d/010-symlink-bundle.sh
 # for redirects.
 ENV ADDITIONAL_GLOBAL_NGINX_CONFIG=""
 ENV ADDITIONAL_NGINX_CONFIG=""
+# Configure the default 404 page. Most SPAs will just return /index.html and then the client side
+# routing will take over, but some applications may want to return a page such as 404.html.
+ENV DEFAULT_404_PAGE="/index.html"
 # Setting default values here so client don't have to set these themselves and 
 # they only need to set them if they want.
 ENV CSP_CONNECT_SRC=""

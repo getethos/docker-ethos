@@ -1,13 +1,19 @@
 server {
   listen 80;
+  root   /usr/share/nginx/html;
 
   # Add configs that we want on every request. For example, we're adding CSP headers
   include /etc/nginx/conf.d/global.conf;
 
   location / {
-    root   /usr/share/nginx/html;
-    try_files $uri $uri/ /index.html;
+    index index.html;
   }
+
+  location /* {
+    try_files $uri $uri/ =404;
+  }
+
+  error_page 404             ${DEFAULT_404_PAGE};
 
   location /health_check {
     return 200;
@@ -15,13 +21,11 @@ server {
 
   # Disable caching for some types of files
   location ~* \.(manifest|appcache|html?|xml|json)$ {
-    root   /usr/share/nginx/html;
     expires -1;
   }
 
   # Add caching for our static assets
   location ~* \.(js|css|png|jpg|jpeg|gif|ico|woff2)$ {
-    root   /usr/share/nginx/html;
     expires 1M;
   }
 
