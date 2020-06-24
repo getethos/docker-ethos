@@ -9,10 +9,14 @@ server {
     index index.html;
   }
 
+  location / {
+    try_files $uri $uri/ @notfound;
+  }
+
   # Most SPAs just return 200 and /index.html no matter what,
   # but some may want to return a different page or status code.
-  location / {
-    try_files $uri $uri/ ${DEFAULT_404_PAGE} =${DEFAULT_404_STATUS_CODE};
+  location @notfound {
+    return ${DEFAULT_NOT_FOUND_STATUS_CODE} ${DEFAULT_NOT_FOUND_PAGE};
   }
 
   location /health_check {
