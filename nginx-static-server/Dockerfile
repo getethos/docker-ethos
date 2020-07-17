@@ -34,3 +34,6 @@ ENV CSP_IMG_SRC=""
 ENV CSP_MEDIA_SRC=""
 ENV CSP_DEFAULT_SRC=""
 ENV CSP_REPORT_URI=""
+
+# Configure which port nginx listens on. By default just listen on 80
+ENV NGINX_LISTEN_PORT="80"

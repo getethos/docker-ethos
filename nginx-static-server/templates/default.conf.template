@@ -1,5 +1,5 @@
 server {
-  listen 80;
+  listen ${NGINX_LISTEN_PORT};
   root   /usr/share/nginx/html;
 
   # Add configs that we want on every request. For example, we're adding CSP headers
