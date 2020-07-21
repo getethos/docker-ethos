@@ -37,3 +37,5 @@ ENV CSP_REPORT_URI=""
 
 # Configure which port nginx listens on. By default just listen on 80
 ENV NGINX_LISTEN_PORT="80"
+
+WORKDIR /app/dist
