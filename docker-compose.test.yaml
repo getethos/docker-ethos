@@ -7,7 +7,7 @@ services:
         location /foo {
         return 301 $$scheme://$$http_host/app$$is_args$$args;
         }"
-      DEPLOY_ENVIRONMENT: staging
+      NGINX_SERVE_STATIC_FILES_PATH: /app/dist/production
       ADDITIONAL_GLOBAL_NGINX_CONFIG: "
         if ($$http_x_cdn_origin_token = \"\") {
           return 403;
