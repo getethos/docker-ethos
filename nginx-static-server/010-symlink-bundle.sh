@@ -4,7 +4,7 @@ set -e
 
 if [ -z $NGINX_SERVE_STATIC_FILES_PATH ]
 then
-  echo "DEPLOY_ENVIRONMENT is required to be set"
+  echo "NGINX_SERVE_STATIC_FILES_PATH is required to be set"
   exit 1
 fi
 
