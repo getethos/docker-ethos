@@ -38,3 +38,14 @@ server {
   # Leave a directory for Kubernetes to mount any files if we ever need to do that
   include /etc/nginx/conf.d/mounts/*.conf;
 }
+
+server {
+  listen 81;
+  access_log off;
+
+  location /nginx_status {
+    stub_status;
+    # ensures the version information can be retrieved
+    server_tokens on;
+  }
+}
