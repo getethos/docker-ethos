@@ -9,10 +9,11 @@ server {
     index index.html;
   }
 
-  # Most SPAs just return 200 and /index.html no matter what,
-  # but some may want to return a different page or status code.
+  # First try the uri as is. 
+  # Then try the uri/index.html (handles things like http://.../foo which should be served from http://.../foo/index.html)
+  # Then try uri/ (not sure what would match here).
   location / {
-    try_files $uri $uri/ =404;
+    try_files $uri $uri/index.html $uri/ =404;
     error_page 404 =${DEFAULT_NOT_FOUND_STATUS_CODE} ${DEFAULT_NOT_FOUND_PAGE};
     log_not_found off;
   }
