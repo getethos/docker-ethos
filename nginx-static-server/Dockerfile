@@ -36,6 +36,8 @@ ENV CSP_DEFAULT_SRC=""
 ENV CSP_REPORT_URI=""
 
 # Configure which port nginx listens on. By default just listen on 80
+# for regular traffic and 81 for the metrics route
 ENV NGINX_LISTEN_PORT="80"
+ENV NGINX_METRICS_LISTEN_PORT="81"
 
 WORKDIR /app/dist
