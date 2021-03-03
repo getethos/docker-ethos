@@ -8,6 +8,7 @@ on:
       - 'nginx-static-server*'
     paths:
       - 'nginx-static-server/**'
+      - '.github/workflows/build-nginx-static-server.yml'
 
 jobs:
   build:
