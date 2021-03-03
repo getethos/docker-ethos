@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    tags:
+      - 'nginx-static-server*'
     paths:
       - 'nginx-static-server/**'
 
