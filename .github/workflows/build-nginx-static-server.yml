@@ -35,6 +35,6 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
       - name: Build image
-        run: make nginx-build TAG=${{ IMAGE_TAG }}
+        run: make nginx-build TAG=${IMAGE_TAG}
       - name: Push docker image
-        run: make nginx-push TAG=${{ IMAGE_TAG }}
+        run: make nginx-push TAG=${IMAGE_TAG}
