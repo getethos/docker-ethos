@@ -36,8 +36,6 @@ jobs:
           echo "IMAGE_TAG=${IMAGE_TAG}" >> $GITHUB_ENV
       - name: Login to Public ECR
         run: aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/u7h7z7i1
-        env:
-          AWS_REGION: us-east-1
       - name: Build image
         run: make nginx-build TAG=${IMAGE_TAG}
       - name: Push docker image
