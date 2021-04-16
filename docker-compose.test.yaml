@@ -9,6 +9,8 @@ services:
         }"
       NGINX_SERVE_STATIC_FILES_PATH: /app/dist/production
       CSP_FRAME_ANCESTORS: "frame-ancestors www.ethoslife.com;"
+      # Test overriding this header to nothing
+      X_FRAME_OPTIONS_ADD_HEADER: ""
     ports:
       - 8080:80
       - 8081:81

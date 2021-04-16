@@ -34,6 +34,7 @@ ENV CSP_MEDIA_SRC=""
 ENV CSP_DEFAULT_SRC=""
 ENV CSP_REPORT_URI=""
 ENV CSP_FRAME_ANCESTORS=""
+ENV X_FRAME_OPTIONS_ADD_HEADER="add_header X-Frame-Options \"SAMEORIGIN\" always;"
 
 # Configure which port nginx listens on. By default just listen on 80
 # for regular traffic and 81 for the metrics route

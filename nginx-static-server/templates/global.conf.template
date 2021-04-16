@@ -1,4 +1,10 @@
-add_header X-Frame-Options "SAMEORIGIN" always;
+# There is a case where the partners site needs to be embedded as an iframe
+# on the CMS, so I'm adding the ability to disable the X-Frame-Options header.
+# The security risk is mitigated here by adding the frame-ancestors directive
+# to our Content-Security-Policy.
+# This header is enabled by default but it can be overridden by setting X_FRAME_OPTIONS_ADD_HEADER=""
+# as en environment variable at runtime
+${X_FRAME_OPTIONS_ADD_HEADER}
 add_header X-XSS-Protection "1; mode=block" always;
 add_header X-Content-Type-Options "nosniff" always;
 
