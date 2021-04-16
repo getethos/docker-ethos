@@ -8,11 +8,7 @@ services:
         return 301 $$scheme://$$http_host/app$$is_args$$args;
         }"
       NGINX_SERVE_STATIC_FILES_PATH: /app/dist/production
-      ADDITIONAL_GLOBAL_NGINX_CONFIG: "
-        if ($$http_x_cdn_origin_token = \"\") {
-          return 403;
-        }
-      "
+      CSP_FRAME_ANCESTORS: "frame-ancestors www.ethoslife.com;"
     ports:
       - 8080:80
       - 8081:81

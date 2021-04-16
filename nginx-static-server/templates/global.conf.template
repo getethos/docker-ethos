@@ -17,9 +17,10 @@ set $csp_img_src        "${CSP_IMG_SRC}";
 set $csp_media_src      "${CSP_MEDIA_SRC}";
 set $csp_default_src    "${CSP_DEFAULT_SRC}";
 set $csp_report_uri     "${CSP_REPORT_URI}";
+set $csp_frame_ancestors "${CSP_FRAME_ANCESTORS}";
 
 # Concat them all together
-add_header Content-Security-Policy "${csp_connect_src}${csp_style_src}${csp_script_src}${csp_object_src}${csp_frame_src}${csp_font_src}${csp_img_src}${csp_media_src}${csp_default_src}${csp_report_uri}";
+add_header Content-Security-Policy "${csp_connect_src}${csp_style_src}${csp_script_src}${csp_object_src}${csp_frame_src}${csp_font_src}${csp_img_src}${csp_media_src}${csp_default_src}${csp_report_uri}${csp_frame_ancestors}";
 
 # Add in anything else we want on every request from an environment variable
 ${ADDITIONAL_GLOBAL_NGINX_CONFIG}
