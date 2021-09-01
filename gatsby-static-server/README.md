@@ -19,7 +19,7 @@ FROM node:latest as production
 
 # Build your production application bundle
 
-FROM getethos/nginx-static-server:latest
+FROM getethos/gatsby-static-server:latest
 
 WORKDIR /app/dist
 
