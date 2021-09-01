@@ -2,6 +2,8 @@
 
 Docker image for hosting static files produed by Gatsby.js. We build both the staging and production bundles of our applications in the same image and configure which bundle we serve at runtime.
 
+The nginx configuration is based on the recommended [Gatsby.js caching guide](https://www.gatsbyjs.com/docs/caching/).
+
 ## Usage
 
 Using a multi-stage Docker build, build your gatsby source files. Then in the final Docker build stage, copy the source files for staging and production to `/app/dist/staging` and `/app/dist/production`. At runtime, set `NGINX_SERVE_STATIC_FILES_PATH` env var to choose with bundle to serve.
