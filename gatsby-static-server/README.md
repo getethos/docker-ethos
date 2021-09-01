@@ -26,3 +26,20 @@ WORKDIR /app/dist
 COPY --from=staging /app/public staging
 COPY --from=production /app/public production
 ```
+
+## Configuring Redirects
+You can place files into the `/etc/nginx/conf.d/redirects/` directory in the Docker image that contain Nginx redirect logic and it will be automatically loaded.
+
+### Example Redirects File
+```
+# redirects.conf
+location ~ ^/term/preapply/quote/?$ {
+  return 301 $normalized_proto://$http_host/app$is_args$args;
+}
+```
+
+### Copying the File into Docker Image
+Copy this line into your Dockerfile (adjusting the file path to your own file).
+```
+COPY redirects.conf /etc/nginx/conf.d/redirects/redirects.conf
+```
