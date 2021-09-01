@@ -1,4 +1,4 @@
-name: Build Nginx Static Server
+name: Build Gatsby Static Server
 
 on:
   push:
@@ -11,7 +11,16 @@ on:
       - ".github/workflows/build-gatsby-static-server.yml"
 
 jobs:
+  test:
+    name: Test Nginx settings
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run tests
+        run: make gatsby-static-server-test
   build:
+    needs: ["test"]
     name: Build & Push Docker image
     runs-on: ubuntu-latest
     steps:
@@ -28,7 +37,7 @@ jobs:
       - name: Set image tag
         run: |
           IMAGE_TAG=${GITHUB_REF#refs/*/}
-          IMAGE_TAG=${IMAGE_TAG#nginx-static-server-}
+          IMAGE_TAG=${IMAGE_TAG#gatsby-static-server-}
           if [[ $IMAGE_TAG == "master" ]]
           then
             IMAGE_TAG="latest"
@@ -37,6 +46,6 @@ jobs:
       - name: Login to Public ECR
         run: aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/u7h7z7i1
       - name: Build image
-        run: make nginx-build TAG=${IMAGE_TAG}
+        run: make gatsby-static-server-build TAG=${IMAGE_TAG}
       - name: Push docker image
-        run: make nginx-push TAG=${IMAGE_TAG}
+        run: make gatsby-static-server-push TAG=${IMAGE_TAG}
