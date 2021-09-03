@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkgatsby_test_site=self.webpackChunkgatsby_test_site||[]).push([[475],{230:function(e,t,s){s.r(t);var a=s(294),n={color:"#232129",padding:96,fontFamily:"-apple-system, Roboto, sans-serif, serif"},i={marginTop:0,marginBottom:64,maxWidth:320};t.default=function(){return a.createElement("main",{style:n},a.createElement("title",null,"Agents Page"),a.createElement("h1",{style:i},"This is the agents page"))}}}]);
+//# sourceMappingURL=component---src-pages-agents-js-4d938098f7589e753039.js.map
