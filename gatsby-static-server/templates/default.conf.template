@@ -25,6 +25,7 @@ server {
     add_header X-Content-Type-Options "nosniff" always;
     add_header Content-Security-Policy $csp_header always;
     add_header X-Frame-Options "SAMEORIGIN" always;
+    absolute_redirect off;
   }
 
   location @notfound {

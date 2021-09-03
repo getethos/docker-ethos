@@ -27,6 +27,11 @@ get_cache_control_header() {
   echo $result
 }
 
+get_location_header() {
+  local result=$(curl -sI $1 | tr -d '\r' | sed -En 's/^Location: (.*)/\1/p')
+  echo $result
+}
+
 wait_for_it() {
   until curl --silent $1 > /dev/null; do
     echo "host is unavailable - sleeping"
@@ -80,6 +85,18 @@ test_cache_control_header() {
   echo "Testing $host for Cache-Control header. Expected value: $expected..."
   local result=$(get_cache_control_header $host)
   echo "Got $result Cache-Control header from $host"
+  if [[ $result != $expected ]]; then
+    echo "$result was not the expected response of $expected. Exiting."
+    exit 1
+  fi
+}
+
+test_location_header() {
+  local host=$1
+  local expected=$2
+  echo "Testing $host for Location header. Expected value: $expected..."
+  local result=$(get_location_header $host)
+  echo "Got $result Location header from $host"
   if [[ $result != $expected ]]; then
     echo "$result was not the expected response of $expected. Exiting."
     exit 1
