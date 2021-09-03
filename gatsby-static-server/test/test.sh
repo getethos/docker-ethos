@@ -25,6 +25,9 @@ test_status_code $HOST/unknown              404
 test_redirect_url $HOST/foo ""
 test_redirect_url $HOST/term/preapply/quote http://localhost:8080/app
 test_redirect_url "$HOST/term/preapply/quote?foo=bar&ethos=cool" "http://localhost:8080/app?foo=bar&ethos=cool"
+test_redirect_url "$HOST/agents" "http://localhost:8080/agents/"
+
+test_location_header "$HOST/agents" "/agents/"
 
 test_cache_control_header $HOST/index.html "public, no-cache;"
 test_cache_control_header $HOST/page-data/app-data.json "public, no-cache;"
