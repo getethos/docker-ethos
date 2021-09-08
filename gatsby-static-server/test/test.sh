@@ -29,9 +29,9 @@ test_redirect_url "$HOST/agents" "http://localhost:8080/agents/"
 
 test_location_header "$HOST/agents" "/agents/"
 
-test_cache_control_header $HOST/index.html "public, no-cache;"
-test_cache_control_header $HOST/page-data/app-data.json "public, no-cache;"
-test_cache_control_header $HOST/page-data/index/page-data.json "public, no-cache;"
+test_cache_control_header $HOST/index.html "public, max-age=0, must-revalidate, s-maxage=120;"
+test_cache_control_header $HOST/page-data/app-data.json "public, max-age=0, must-revalidate, s-maxage=120;"
+test_cache_control_header $HOST/page-data/index/page-data.json "public, max-age=0, must-revalidate, s-maxage=120;"
 test_cache_control_header $HOST/static/foo.txt "public, max-age=31536000, immutable;"
 test_cache_control_header $HOST/component---src-pages-404-js-23c828b1f8a6967959ce.js "public, max-age=31536000, immutable;"
 

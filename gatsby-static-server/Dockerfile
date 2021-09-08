@@ -31,4 +31,8 @@ ENV CSP_FRAME_ANCESTORS=""
 ENV NGINX_LISTEN_PORT="80"
 ENV NGINX_METRICS_LISTEN_PORT="81"
 
+# Cache-Control header to use for files that should not be cached
+# such as html and page-data.json files
+ENV CACHE_CONTROL_NO_CACHE="public, max-age=0, must-revalidate, s-maxage=120;"
+
 WORKDIR /app/dist

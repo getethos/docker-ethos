@@ -9,18 +9,22 @@ server {
   # as search terminates right after the first comparison.
   location = / {
     index index.html;
-    add_header Cache-Control "public, no-cache;";
+    add_header Cache-Control "${CACHE_CONTROL_NO_CACHE}";
     add_header X-XSS-Protection "1; mode=block" always;
     add_header X-Content-Type-Options "nosniff" always;
     add_header Content-Security-Policy $csp_header always;
     add_header X-Frame-Options "SAMEORIGIN" always;
   }
 
+  location = /sw.js {
+    add_header Cache-Control "${CACHE_CONTROL_NO_CACHE}";
+  }
+
   # HTML files should never be cached by the browser.
   location / {
     index index.html;
     try_files $uri $uri/ @notfound;
-    add_header Cache-Control "public, no-cache;";
+    add_header Cache-Control "${CACHE_CONTROL_NO_CACHE}";
     add_header X-XSS-Protection "1; mode=block" always;
     add_header X-Content-Type-Options "nosniff" always;
     add_header Content-Security-Policy $csp_header always;
@@ -41,18 +45,18 @@ server {
   # Similar to HTML files, the JSON files in the public/page-data/ directory
   # should never be cached by the browser.
   location ~* \/page-data.*\.json$ {
-    add_header Cache-Control "public, no-cache;";
+    add_header Cache-Control "${CACHE_CONTROL_NO_CACHE}";
     add_header X-Test "matching here";
   }
 
   # The new app-data.json file which contains the build hash for the current deployment of the site
   # should also share the same cache-control header as page-data.json
   location = /app-data.json {
-    add_header Cache-Control "public, no-cache;";
+    add_header Cache-Control "${CACHE_CONTROL_NO_CACHE}";
   }
 
   # All files in static/ should be cached forever.
-  location /static {
+  location ~* ^/static {
     add_header Cache-Control "public, max-age=31536000, immutable;";
   }
 
@@ -61,10 +65,6 @@ server {
   # upon each load to check if a new version of the site is available
   location ~* \.(js|css)$ {
     add_header Cache-Control "public, max-age=31536000, immutable;";
-  }
-
-  location = /sw.js {
-    add_header Cache-Control "public, no-cache;";
   }
 
   include /etc/nginx/conf.d/redirects/*.conf;
