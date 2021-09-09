@@ -17,3 +17,10 @@ gatsby-static-server-push:
 gatsby-static-server-test:
 	docker build -t getethos/gatsby-static-server:test gatsby-static-server/
 	cd gatsby-static-server/test && bash test.sh
+
+maintenance-page-build:
+	docker build -t getethos/maintenance-page:$(TAG) maintenance-page/
+
+maintenance-page-push:
+	docker tag getethos/maintenance-page:$(TAG) 588240676032.dkr.ecr.us-east-1.amazonaws.com/maintenance-page:$(TAG)
+	docker push 588240676032.dkr.ecr.us-east-1.amazonaws.com/maintenance-page:$(TAG)
