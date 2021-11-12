@@ -24,7 +24,8 @@ ENV CSP_IMG_SRC=""
 ENV CSP_MEDIA_SRC=""
 ENV CSP_DEFAULT_SRC=""
 ENV CSP_REPORT_URI=""
-ENV CSP_FRAME_ANCESTORS=""
+# default to blocking the site being embedded elsewhere
+ENV CSP_FRAME_ANCESTORS="frame-ancestors 'none';"
 
 # Configure which port nginx listens on. By default just listen on 80
 # for regular traffic and 81 for the metrics route
