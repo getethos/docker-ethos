@@ -35,4 +35,6 @@ test_cache_control_header $HOST/page-data/index/page-data.json "public, max-age=
 test_cache_control_header $HOST/static/foo.txt "public, max-age=31536000, immutable;"
 test_cache_control_header $HOST/component---src-pages-404-js-23c828b1f8a6967959ce.js "public, max-age=31536000, immutable;"
 
+test_csp_header $HOST "frame-ancestors 'none';"
+
 echo "All tests passed."

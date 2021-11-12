@@ -32,6 +32,11 @@ get_location_header() {
   echo $result
 }
 
+get_csp_header() {
+  local result=$(curl -sI $1 | tr -d '\r' | sed -En 's/^Content-Security-Policy: (.*)/\1/p')
+  echo $result
+}
+
 wait_for_it() {
   until curl --silent $1 > /dev/null; do
     echo "host is unavailable - sleeping"
@@ -97,6 +102,18 @@ test_location_header() {
   echo "Testing $host for Location header. Expected value: $expected..."
   local result=$(get_location_header $host)
   echo "Got $result Location header from $host"
+  if [[ $result != $expected ]]; then
+    echo "$result was not the expected response of $expected. Exiting."
+    exit 1
+  fi
+}
+
+test_csp_header() {
+  local host=$1
+  local expected=$2
+  echo "Testing $host for CSP header. Expected value: $expected..."
+  local result=$(get_csp_header $host)
+  echo "Got $result CSP header from $host"
   if [[ $result != $expected ]]; then
     echo "$result was not the expected response of $expected. Exiting."
     exit 1
