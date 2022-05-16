@@ -36,5 +36,7 @@ test_cache_control_header $HOST/static/foo.txt "public, max-age=31536000, immuta
 test_cache_control_header $HOST/component---src-pages-404-js-23c828b1f8a6967959ce.js "public, max-age=31536000, immutable;"
 
 test_csp_header $HOST "frame-ancestors 'none';"
+test_csp_header $HOST/life/external-estimate-widget "frame-ancestors: '*';"
+test_csp_header $HOST/life/external-estimate-widget/ "frame-ancestors: '*';"
 
 echo "All tests passed."

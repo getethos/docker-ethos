@@ -12,6 +12,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY templates /etc/nginx/templates
 COPY 010-symlink-bundle.sh /docker-entrypoint.d/010-symlink-bundle.sh
 
+ENV ADDITIONAL_NGINX_CONFIG=""
 # Setting default values here so client don't have to set these themselves and 
 # they only need to set them if they want.
 ENV CSP_CONNECT_SRC=""

@@ -66,6 +66,8 @@ server {
   }
 
   include /etc/nginx/conf.d/redirects/*.conf;
+  # Add configs that can be changed at runtime
+  include /etc/nginx/conf.d/runtime.conf;
 }
 
 server {

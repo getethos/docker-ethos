@@ -1,8 +1,17 @@
+ADDITIONAL_NGINX_CONFIG=$(cat <<-EOF
+location /life/external-estimate-widget {
+  add_header Content-Security-Policy "frame-ancestors: '*';" always;
+  try_files /life/external-estimate-widget/index.html =404;
+}
+EOF
+)
+
 start_nginx() {
   docker run -p 8080:8080 \
     -e "NGINX_SERVE_STATIC_FILES_PATH=/app/dist/production" \
     -e "NGINX_LISTEN_PORT=8080" \
     -e "NGINX_METRICS_LISTEN_PORT=8081" \
+    -e ADDITIONAL_NGINX_CONFIG="$ADDITIONAL_NGINX_CONFIG" \
     -d \
     -v `pwd`/fixtures/redirects.conf:/etc/nginx/conf.d/redirects/redirects.conf \
     -v `pwd`/fixtures/public:/app/dist/production \
@@ -62,7 +71,7 @@ test_status_code() {
   echo "Testing $host for status code $expected..."
   local result=$(get_status_code $host)
   echo "Got $result response from $host"
-  if [[ $result != $expected ]]; then
+  if [[ "$result" != "$expected" ]]; then
     echo "$result was not the expected response of $expected. Exiting."
     exit 1
   fi
@@ -78,7 +87,7 @@ test_redirect_url() {
   echo "Testing $host for redirect URL $expected..."
   local result=$(get_redirect_url $host)
   echo "Got $result response from $host"
-  if [[ $result != $expected ]]; then
+  if [[ "$result" != "$expected" ]]; then
     echo "$result was not the expected response of $expected. Exiting."
     exit 1
   fi
@@ -90,7 +99,7 @@ test_cache_control_header() {
   echo "Testing $host for Cache-Control header. Expected value: $expected..."
   local result=$(get_cache_control_header $host)
   echo "Got $result Cache-Control header from $host"
-  if [[ $result != $expected ]]; then
+  if [[ "$result" != "$expected" ]]; then
     echo "$result was not the expected response of $expected. Exiting."
     exit 1
   fi
@@ -102,7 +111,7 @@ test_location_header() {
   echo "Testing $host for Location header. Expected value: $expected..."
   local result=$(get_location_header $host)
   echo "Got $result Location header from $host"
-  if [[ $result != $expected ]]; then
+  if [[ "$result" != "$expected" ]]; then
     echo "$result was not the expected response of $expected. Exiting."
     exit 1
   fi
@@ -114,7 +123,7 @@ test_csp_header() {
   echo "Testing $host for CSP header. Expected value: $expected..."
   local result=$(get_csp_header $host)
   echo "Got $result CSP header from $host"
-  if [[ $result != $expected ]]; then
+  if [[ "$result" != "$expected" ]]; then
     echo "$result was not the expected response of $expected. Exiting."
     exit 1
   fi

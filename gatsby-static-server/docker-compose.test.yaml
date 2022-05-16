@@ -7,6 +7,11 @@ services:
       NGINX_METRICS_LISTEN_PORT: "8081"
       NGINX_SERVE_STATIC_FILES_PATH: /app/dist/production
       CSP_CONNECT_SRC: "connect-src 'self' https://segment-api.ethoslife.com;"
+      ADDITIONAL_NGINX_CONFIG: |
+        location = /life/external-estimate-widget {
+          index index.html;
+          add_header Content-Security-Policy "frame-ancestors: '*'" always;
+        }
     ports:
       - 8080:8080
       - 8081:8081
