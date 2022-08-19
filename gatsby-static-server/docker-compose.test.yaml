@@ -17,4 +17,4 @@ services:
       - 8081:8081
     volumes:
       - ./test/fixtures/public:/app/dist/production
-      # - ./test/fixtures/redirects.conf:/etc/nginx/conf.d/includes/redirects.conf
+      # - ./test/fixtures/redirects.conf:/etc/nginx/conf.d/redirects/redirects.conf
