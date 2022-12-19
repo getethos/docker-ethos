@@ -46,6 +46,11 @@ get_csp_header() {
   echo $result
 }
 
+get_content_encoding_header() {
+  local result=$(curl -H "Accept-Encoding: $2" -sI $1 | tr -d '\r' | sed -En 's/^Content-Encoding: (.*)/\1/p')
+  echo $result
+}
+
 wait_for_it() {
   until curl --silent $1 > /dev/null; do
     echo "host is unavailable - sleeping"
@@ -123,6 +128,19 @@ test_csp_header() {
   echo "Testing $host for CSP header. Expected value: $expected..."
   local result=$(get_csp_header $host)
   echo "Got $result CSP header from $host"
+  if [[ "$result" != "$expected" ]]; then
+    echo "$result was not the expected response of $expected. Exiting."
+    exit 1
+  fi
+}
+
+test_content_encoding_header() {
+  local host=$1
+  local accept=$2
+  local expected=$3
+  echo "Testing $host for Content-Encoding header. Expected value: $expected..."
+  local result=$(get_content_encoding_header $host $accept)
+  echo "Got $result Content-Encoding header from $host"
   if [[ "$result" != "$expected" ]]; then
     echo "$result was not the expected response of $expected. Exiting."
     exit 1

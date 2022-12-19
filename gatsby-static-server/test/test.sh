@@ -39,4 +39,9 @@ test_csp_header $HOST "frame-ancestors 'none';"
 test_csp_header $HOST/life/external-estimate-widget "frame-ancestors: '*';"
 test_csp_header $HOST/life/external-estimate-widget/ "frame-ancestors: '*';"
 
+test_content_encoding_header $HOST "br" "br"
+test_content_encoding_header $HOST "gzip,br" "br"
+test_content_encoding_header $HOST "br,gzip" "br"
+test_content_encoding_header $HOST "gzip" "gzip"
+
 echo "All tests passed."

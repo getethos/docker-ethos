@@ -1,4 +1,4 @@
-FROM nginx:stable-alpine
+FROM getethos/gatsby-static-server-base:latest
 
 # Delete the default nginx files
 RUN rm -r /usr/share/nginx/html \
