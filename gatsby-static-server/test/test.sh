@@ -43,5 +43,8 @@ test_content_encoding_header $HOST "br" "br"
 test_content_encoding_header $HOST "gzip,br" "br"
 test_content_encoding_header $HOST "br,gzip" "br"
 test_content_encoding_header $HOST "gzip" "gzip"
+test_content_encoding_header $HOST/app-e3cfa66ac1a9b1d00674.js "br" "br"
+test_content_encoding_header $HOST/app-e3cfa66ac1a9b1d00674.js "gzip,br" "br"
+test_content_encoding_header $HOST/app-e3cfa66ac1a9b1d00674.js "br,gzip" "br"
 
 echo "All tests passed."
