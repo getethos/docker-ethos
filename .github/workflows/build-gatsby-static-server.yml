@@ -34,10 +34,6 @@ jobs:
           aws-region: us-east-1
       - name: Print AWS Caller Identity
         run: aws sts get-caller-identity
-      - name: Build base image
-        run: |
-          cd gatsby-static-server/base-image
-          docker build --build-arg ENABLED_MODULES="brotli" -f Dockerfile.alpine -t getethos/gatsby-static-server-base .
       - name: Set image tag
         run: |
           IMAGE_TAG=${GITHUB_REF#refs/*/}

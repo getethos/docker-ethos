@@ -8,6 +8,7 @@ nginx-push:
 	docker push public.ecr.aws/u7h7z7i1/getethos/nginx-static-server:$(TAG)
 
 gatsby-static-server-build:
+	docker build --build-arg ENABLED_MODULES="brotli" -f gatsby-static-server/base-image/Dockerfile.alpine -t getethos/gatsby-static-server-base gatsby-static-server/base-image
 	docker build -t getethos/gatsby-static-server:$(TAG) gatsby-static-server/
 
 gatsby-static-server-push:
@@ -15,6 +16,7 @@ gatsby-static-server-push:
 	docker push public.ecr.aws/u7h7z7i1/getethos/gatsby-static-server:$(TAG)
 
 gatsby-static-server-test:
+	docker build --build-arg ENABLED_MODULES="brotli" -f gatsby-static-server/base-image/Dockerfile.alpine -t getethos/gatsby-static-server-base gatsby-static-server/base-image
 	docker build -t getethos/gatsby-static-server:test gatsby-static-server/
 	cd gatsby-static-server/test && bash test.sh
 
