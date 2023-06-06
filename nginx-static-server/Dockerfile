@@ -1,4 +1,4 @@
-FROM nginx:1.19.0-alpine
+FROM nginx:1.25.0-alpine
 
 # Delete the default nginx files
 RUN rm -r /usr/share/nginx/html \
