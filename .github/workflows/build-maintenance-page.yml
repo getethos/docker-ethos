@@ -35,7 +35,7 @@ jobs:
           fi
           echo "IMAGE_TAG=${IMAGE_TAG}" >> $GITHUB_ENV
       - name: Login to Public ECR
-        run: aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/u7h7z7i1
+        run: aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 588240676032.dkr.ecr.us-east-1.amazonaws.com
       - name: Build image
         run: make maintenance-page-build TAG=${IMAGE_TAG}
       - name: Push docker image
